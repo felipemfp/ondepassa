@@ -4,3 +4,4 @@ dist/
 .dev.vars
 .env
 seed.sql
+seed-ignore.sql
