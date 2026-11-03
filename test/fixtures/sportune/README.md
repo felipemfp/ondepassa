@@ -1,6 +1,6 @@
 # Sportune fixtures
 
-Captured 2026-10-31 ~13:12 BRT from `https://sportune.com.br/onde-assistir/<slug>` for `flamengo`, `vasco`, `sao-paulo`.
+Captured 2026-10-31 ~13:12 BRT from `https://sportune.com.br/onde-assistir/<slug>` for `flamengo`, `vasco`, `sao-paulo`, and 2026-11-03 ~18:33 BRT for `mirassol`.
 
 Only the two `<table>` elements are kept (upcoming matches, then past results), byte for byte as served. The rest of the page is dropped so the repo holds the match facts the parser reads and nothing else.
 
