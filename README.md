@@ -105,8 +105,14 @@ npm run scrape:local
 npx wrangler d1 export onde-passa --local --table matches --no-schema --output seed.sql
 ```
 
+The export uses plain `INSERT`s, which fail with `UNIQUE constraint failed` once the table has rows. `OR IGNORE` works on an empty or filled table: it adds the missing rows and leaves existing ones as they are.
+
 ```bash
-npx wrangler d1 execute onde-passa --remote --file seed.sql --yes
+sed 's/^INSERT INTO/INSERT OR IGNORE INTO/' seed.sql > seed-ignore.sql
+```
+
+```bash
+npx wrangler d1 execute onde-passa --remote --file seed-ignore.sql --yes
 ```
 
 Watch the logs (`scrape.done`, `scrape.empty`, `page.view`, `og.render`, `ics.fetch`, `override.saved`):
@@ -117,7 +123,7 @@ npx wrangler tail
 
 ## Add a team
 
-Add it to `TEAMS` in [src/teams.ts](src/teams.ts). The slug must be the one Sportune uses in its URL, and `aliases` must list every name Sportune prints for the team. Check `https://sportune.com.br/onde-assistir/<slug>` loads first.
+Add it to `TEAMS` in [src/teams.ts](src/teams.ts). The slug must be the one Sportune uses in its URL, and `aliases` must list every name Sportune prints for the team. Check `https://sportune.com.br/onde-assistir/<slug>` loads first. After deploying, the team has no matches until the next cron run; to fill it right away, follow the seed steps in [Deploy](#deploy-first-time).
 
 ## When Sportune changes its page
 
