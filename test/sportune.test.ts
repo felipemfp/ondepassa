@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { parseSportune } from "../src/scraper/sportune";
 import flamengo from "./fixtures/sportune/flamengo.html?raw";
+import mirassol from "./fixtures/sportune/mirassol.html?raw";
 import saoPaulo from "./fixtures/sportune/sao-paulo.html?raw";
 import vasco from "./fixtures/sportune/vasco.html?raw";
 
@@ -56,6 +57,13 @@ describe("parseSportune", () => {
   it("parses the São Paulo page", () => {
     const first = parseSportune(saoPaulo)[0]!;
     expect(first).toMatchObject({ date: "04/11", time: "21:30", home: "São Paulo", away: "Corinthians" });
+  });
+
+  it("parses the Mirassol page, including kickoffs still to be confirmed", () => {
+    const rows = parseSportune(mirassol);
+    expect(rows[0]).toMatchObject({ date: "03/11", time: "19:30", home: "Chapecoense", away: "Mirassol" });
+    expect(rows[0]!.channels).toEqual([{ name: "Premiere", status: "confirmed" }]);
+    expect(rows[3]).toMatchObject({ date: "28/11", time: null, home: "Mirassol", away: "Athletico Paranaense" });
   });
 
   it("returns [] for a page without an upcoming table", () => {

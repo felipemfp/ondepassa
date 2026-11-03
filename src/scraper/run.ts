@@ -16,7 +16,7 @@ export async function runScrape(db: D1Database, now: Date, fetchPage: FetchPage)
   const teamsOk: string[] = [];
   const byId = new Map<string, Match>();
 
-  // Sequential on purpose: three polite requests per run.
+  // Sequential on purpose: one polite request per team.
   for (const team of TEAMS) {
     try {
       const { listings, skipped } = parseSportunePage(await fetchPage(team.slug));

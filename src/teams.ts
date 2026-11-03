@@ -8,6 +8,7 @@ export const TEAMS: Team[] = [
   { slug: "flamengo", name: "Flamengo", aliases: ["Flamengo"] },
   { slug: "vasco", name: "Vasco", aliases: ["Vasco", "Vasco da Gama"] },
   { slug: "sao-paulo", name: "São Paulo", aliases: ["São Paulo"] },
+  { slug: "mirassol", name: "Mirassol", aliases: ["Mirassol"] },
 ];
 
 export function findTeam(slug: string): Team | undefined {

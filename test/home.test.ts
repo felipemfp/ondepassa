@@ -8,7 +8,7 @@ describe("home and 404", () => {
     expect(res.status).toBe(200);
     expect(res.headers.get("cache-control")).toBe("public, max-age=300");
     const html = await res.text();
-    for (const href of ['href="/flamengo"', 'href="/vasco"', 'href="/sao-paulo"']) expect(html).toContain(href);
+    for (const href of ['href="/flamengo"', 'href="/vasco"', 'href="/sao-paulo"', 'href="/mirassol"']) expect(html).toContain(href);
     expect(html).toContain("Flamengo x Grêmio · qua 04/11 19:30");
     expect(html).toContain("Palmeiras x Vasco da Gama · dom 01/11 16:00");
   });

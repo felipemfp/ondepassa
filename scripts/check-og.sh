@@ -6,7 +6,7 @@ BASE=${BASE:-http://localhost:8787}
 OUT=${1:-$(mktemp -d)}
 LIMIT=$((300 * 1024))
 status=0
-for team in flamengo vasco sao-paulo; do
+for team in flamengo vasco sao-paulo mirassol; do
   file="$OUT/$team.png"
   curl -fsS "$BASE/$team/og.png" -o "$file"
   bytes=$(wc -c < "$file")

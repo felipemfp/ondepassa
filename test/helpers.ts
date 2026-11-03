@@ -2,12 +2,13 @@ import { env } from "cloudflare:test";
 import { handle } from "../src/index";
 import { runScrape } from "../src/scraper/run";
 import flamengo from "./fixtures/sportune/flamengo.html?raw";
+import mirassol from "./fixtures/sportune/mirassol.html?raw";
 import saoPaulo from "./fixtures/sportune/sao-paulo.html?raw";
 import vasco from "./fixtures/sportune/vasco.html?raw";
 
 export const NOW = new Date("2026-10-31T16:00:00Z"); // fixtures were captured that day
 
-export const PAGES: Record<string, string> = { flamengo, vasco, "sao-paulo": saoPaulo };
+export const PAGES: Record<string, string> = { flamengo, vasco, "sao-paulo": saoPaulo, mirassol };
 
 export const scrapeFixtures = (now = NOW) => runScrape(env.DB, now, async (team) => PAGES[team]!);
 

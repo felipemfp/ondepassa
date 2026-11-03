@@ -4,17 +4,18 @@ import type { Match } from "../src/model";
 import { runScrape } from "../src/scraper/run";
 import { getMatch, nextMatch, upcomingMatches } from "../src/store/matches";
 import flamengo from "./fixtures/sportune/flamengo.html?raw";
+import mirassol from "./fixtures/sportune/mirassol.html?raw";
 import saoPaulo from "./fixtures/sportune/sao-paulo.html?raw";
 import vasco from "./fixtures/sportune/vasco.html?raw";
 import { NOW } from "./helpers";
 
-const pages: Record<string, string> = { flamengo, vasco, "sao-paulo": saoPaulo };
+const pages: Record<string, string> = { flamengo, vasco, "sao-paulo": saoPaulo, mirassol };
 const fromFixtures = async (team: string) => pages[team]!;
 
 describe("runScrape", () => {
   it("stores the upcoming matches for all teams", async () => {
     const result = await runScrape(env.DB, NOW, fromFixtures);
-    expect(result.teamsOk).toEqual(["flamengo", "vasco", "sao-paulo"]);
+    expect(result.teamsOk).toEqual(["flamengo", "vasco", "sao-paulo", "mirassol"]);
     const next = await nextMatch(env.DB, "flamengo", NOW);
     expect(next?.id).toBe("flamengo-gremio-brasileirao-serie-a-2026-11-04");
     expect(next?.kickoffUtc).toBe("2026-11-04T22:30:00.000Z");
